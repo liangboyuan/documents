@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8">
+    {include file="public/title"}
+
+    <meta name="description" content="Dashboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Basic Styles-->
+    <link href="__ADMIN__/style/bootstrap.css" rel="stylesheet">
+    <link href="__ADMIN__/style/font-awesome.css" rel="stylesheet">
+    <link href="__ADMIN__/style/weather-icons.css" rel="stylesheet">
+
+    <!--Beyond styles-->
+    <link id="beyond-link" href="__ADMIN__/style/beyond.css" rel="stylesheet" type="text/css">
+    <link href="__ADMIN__/style/demo.css" rel="stylesheet">
+    <link href="__ADMIN__/style/typicons.css" rel="stylesheet">
+    <link href="__ADMIN__/style/animate.css" rel="stylesheet">
+
+    <link href="__STATIC__/assets/css/lightbox.min.css" rel="stylesheet"/>
+</head>
+<body>
+	<!-- 头部 -->
+	{include file="public/top"}
+	<!-- /头部 -->
+	
+	<div class="main-container container-fluid">
+		<div class="page-container">
+			            <!-- Page Sidebar -->
+            {include file="public/left"}
+        </div>
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li><a href="#">系统</a></li>
+                        <li class="active">用户管理</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+
+                <!-- Page Body -->
+                <div class="page-body">
+                    
+                <button type="button" tooltip="添加文档" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '{:url('add')}'"> <i class="fa fa-plus"></i> Add
+                </button>
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <div class="widget">
+                            <div class="widget-body">
+                                <h4>图片</h4>
+                                {volist name="pictureList" id="vo" empty="暂无数据"}
+                                <a  style="display: inline;"  href="__STATIC__/{$activityMd5Name}/{$vo.md5_name}.{$vo.type}" data-lightbox="example-set" data-title="点击图片左侧或右侧可查看下一张">
+                                    <img style="display: inline; border:2px solid white; object-fit: cover" width="240" height="180" border="4" src="__STATIC__/{$activityMd5Name}/{$vo.md5_name}.{$vo.type}" alt=""/></a>
+                                {/volist}
+
+                                <br/>
+                                <h4>音频</h4>
+                                <div class="flip-scroll">
+                                    <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center">文件名</th>
+                                        <th class="text-center">文件类型</th>
+                                        <th class="text-center">文件大小</th>
+                                        <th class="text-center">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {volist name="audioList" id="vo" empty="暂无数据"}
+                                    <tr>
+                                        <td class="text-center">{$vo.name}</td>
+                                        <td class="text-center">{$vo.type}</td>
+                                        <td class="text-center">{$vo.size}</td>
+                                        <td class="text-center">
+                                            <a class="text-primary" href="#" onclick="openModal('{$vo.md5_name}','{$vo.type}')">浏览</a>
+                                            <a class="text-primary" href="__STATIC__/{$activityMd5Name}/{$vo.md5_name}.{$vo.type}" download="{$vo.md5_name}.{$vo.type}">下载</a>
+                                        </td>
+                                    </tr>
+                                    {/volist}
+                                    </tbody>
+                                    </table>
+                                </div>
+
+                                <h4>视频</h4>
+                                <div class="flip-scroll">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">文件名</th>
+                                            <th class="text-center">文件类型</th>
+                                            <th class="text-center">文件大小</th>
+                                            <th class="text-center">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {volist name="videoList" id="vo" empty="暂无数据"}
+                                        <tr>
+                                            <td class="text-center">{$vo.name}</td>
+                                            <td class="text-center">{$vo.type}</td>
+                                            <td class="text-center">{$vo.size}</td>
+                                            <td class="text-center">
+                                                <a class="text-primary" href="#" onclick="openModal('{$vo.md5_name}','{$vo.type}')">浏览</a>
+                                                <a class="text-primary" href="__STATIC__/{$activityMd5Name}/{$vo.md5_name}.{$vo.type}" download="{$vo.md5_name}.{$vo.type}">下载</a>
+                                            </td>
+                                        </tr>
+                                        {/volist}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <h4>备注</h4>
+                                <p style="font-size: 17px">{$remark}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+		</div>	
+	</div>
+
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">        
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel1">预览窗口<span style="font-size:70%"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <img id="img_preview" hidden="hidden" src="" width='480 '></img>
+                    <video id="video_preview" hidden="hidden" src="" width="480" height="270" controls="controls" autoplay="autoplay"></video>
+                    <audio id="audio_preview" hidden="hidden" src="" autoplay="autoplay" controls="controls"></audio>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <script type="text/javascript">
+    //根据文件类型的不同，模态框所显示的内容也随之不同
+        function openModal(name,type) {
+            switch(type){
+                case "mp3":
+                    $('#audio_preview').removeAttr("hidden");
+                    $('#audio_preview').attr("src","__STATIC__/"+"{$activityMd5Name}"+"/"+name+"."+type);
+                    var myDoc=document.getElementById("audio_preview");
+                    break;
+                case "mp4":
+                    $('#video_preview').removeAttr("hidden");
+                    $('#video_preview').attr("src","__STATIC__/"+"{$activityMd5Name}"+"/"+name+"."+type);
+                    var myDoc=document.getElementById("video_preview");
+                    break;
+                case "jpg":
+                case "png":
+                    $('#img_preview').removeAttr("hidden");
+                    $('#img_preview').attr("src","__STATIC__/"+"{$activityMd5Name}"+"/"+name+"."+type);
+                    break;
+            }
+            //模态框的设置
+            $('#myModal').modal({
+                backdrop: true,
+                keyboard: false,
+                show: true,
+            });
+            //关闭模态框后音频和视频会自动停止播放
+            $('#myModal').on('hidden.bs.modal', function () {
+                $('#audio_preview').attr("hidden","hidden");
+                $('#video_preview').attr("hidden","hidden");
+                $('#img_preview').attr("hidden","hidden");
+                myDoc.pause();
+            })
+        }
+    </script>
+
+    <!--Basic Scripts-->
+    <script src="__ADMIN__/style/jquery_002.js"></script>
+    <script src="__ADMIN__/style/bootstrap.js"></script>
+    <script src="__ADMIN__/style/jquery.js"></script>
+    <!--Beyond Scripts-->
+    <script src="__ADMIN__/style/beyond.js"></script>
+
+    <script src="__STATIC__/assets/js/lightbox.min.js"></script>
+
+</body></html>

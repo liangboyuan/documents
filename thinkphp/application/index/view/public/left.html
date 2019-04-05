@@ -1,0 +1,41 @@
+<div class="sidebar" data-background-color="white" data-active-color="danger">
+    <!--
+        Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
+        Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
+    -->
+    <div class="sidebar-wrapper">
+        <div class="logo">
+            <a href="#" class="simple-text">
+                声像档案管理系统
+            </a>
+        </div>
+
+        <ul class="nav">
+            <li class="active">
+                <a href="{:url('index/index')}">
+                    <i class="ti-panel"></i>
+                    <p style="font-size: 17px">文件浏览</p>
+                </a>
+            </li>
+            <li>
+                <a href="{:url('upload/show')}">
+                    <i class="ti-arrow-circle-up"></i>
+                    <p style="font-size: 17px">上传文件</p>
+                </a>
+            </li>
+            <li>
+                <a href="{:url('index/edit',array('id' => $Request.session.id)}">
+                    <i class="ti-settings"></i>
+                    <p style="font-size: 17px">修改密码</p>
+                </a>
+            </li>
+            <li>
+                <a href="{:url('admin/adminIndex/logout')}">
+                    <i class="ti-back-right"></i>
+                    <p style="font-size: 17px">退出登录</p>
+                </a>
+            </li>
+           
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    {include file="public/title"}
+
+    <meta name="description" content="Dashboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Basic Styles-->
+    <link href="__ADMIN__/style/bootstrap.css" rel="stylesheet">
+    <link href="__ADMIN__/style/font-awesome.css" rel="stylesheet">
+    <link href="__ADMIN__/style/weather-icons.css" rel="stylesheet">
+
+    <!--Beyond styles-->
+    <link id="beyond-link" href="__ADMIN__/style/beyond.css" rel="stylesheet" type="text/css">
+    <link href="__ADMIN__/style/demo.css" rel="stylesheet">
+    <link href="__ADMIN__/style/typicons.css" rel="stylesheet">
+    <link href="__ADMIN__/style/animate.css" rel="stylesheet">
+
+    <link href="__STATIC__/assets/css/load.css" rel="stylesheet">
+    
+</head>
+<body>
+    <!-- 头部 -->
+    {include file="public/top"}
+    <!-- /头部 -->
+    
+    <div class="main-container container-fluid">
+        <div class="page-container">
+                        <!-- Page Sidebar -->
+            {include file="public/left"}
+                        </div>
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li><a href="#">系统</a></li>
+                        <li class="active">文档上传</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+
+                <!-- Page Body -->
+                <div class="page-body">
+                    
+                <!--<button type="button" tooltip="添加文档" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '{:url('add')}'"> <i class="fa fa-plus"></i> Add
+                </button>-->
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <div class="widget">
+                            <div class="widget-body">
+                                <div class="flip-scroll">
+                                <div class="content"> 
+                        <form method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                活动日期：<input type="date" name="date"/>
+                                标题：<input type="text" name="title" autocomplete="off"/>
+                                活动类型：<select name="category">
+                                        {volist name="cates" id="vo"}
+                                            <option>{$vo.cate_name}</option>
+                                        {/volist}
+                                        </select>
+                                视频类型：<select name="vtype">
+                                        <option value="高清">高清</option>
+                                        <option value="标清">标清</option>
+                                        </select>
+                                所属部门：<select name="section">
+                                        {volist name="cate" id="vo"}
+                                        <option>{$vo.cate}</option>
+                                        {/volist}
+                                </select>
+                                </div>
+                            </div>
+                        </div>   
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="image_uploads" class="btn btn-primary">选择你要上传的图片 (PNG, JPG)</label>
+                                    <input type="file" id="image_uploads" name="image_uploads[]" accept=".jpg, .jpeg, .png" multiple>
+                                    <div id="preview1">
+                                        <p>未选择文件</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="audio_uploads" class="btn btn-primary">选择你要上传的音频 (MP3)</label>
+                                    <input type="file" id="audio_uploads" name="audio_uploads[]" accept=".mp3" multiple>
+                                    <div id="preview2">
+                                        <p>未选择文件</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="video_uploads" class="btn btn-primary">选择你要上传的视频 (MP4, MKV)</label>
+                                    <input type="file" id="video_uploads" name="video_uploads[]" accept=".mp4, .mkv" multiple>
+                                    <div id="preview3">
+                                        <p>未选择文件</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h5>备注:</h5>
+                                <textarea class="form-control" style="border: 1px solid grey;" rows="5" name="remark"></textarea>
+                                </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-1">
+                                <input type="submit" value="上传" class="btn btn-lg">
+                            </div>
+                            <div class="col-md-2">
+                                <div id="load" class="load-5" style="display: none">
+                                    <div class="ring-2">
+                                        <div class="ball-holder">
+                                            <div class="ball"></div>
+                                        </div>
+                                    </div>      
+                                    <div align="center"><strong>正在上传</strong></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        </form>
+             
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+        </div>  
+    </div>
+
+        <!--Basic Scripts-->
+    <script src="__ADMIN__/style/jquery_002.js"></script>
+    <script src="__ADMIN__/style/bootstrap.js"></script>
+    <script src="__ADMIN__/style/jquery.js"></script>
+    <!--Beyond Scripts-->
+    <script src="__ADMIN__/style/beyond.js"></script>
+    <script type="text/javascript">
+    // 获取 input 元素
+    var input = document.getElementsByTagName("input");
+    // 获取 preview 元素
+    var preview1 = document.getElementById('preview1');
+    var preview2 = document.getElementById('preview2');
+    var preview3 = document.getElementById('preview3');
+
+    for(var i = 3; i <= 5; i++){
+        input[i].style.display = "none";
+    }
+
+    input[3].addEventListener("change", updateImageDisplay);
+    input[4].addEventListener("change", updateAudioDisplay);
+    input[5].addEventListener("change", updateVideoDisplay);
+
+    function updateImageDisplay() {
+    while(preview1.firstChild) {
+        preview1.removeChild(preview1.firstChild);
+    }
+
+    var curFiles = input[3].files;
+    if(curFiles.length === 0) {
+        var para = document.createElement('p');
+        para.textContent = 'No files currently selected for upload';
+        preview1.appendChild(para);
+    } else {
+        var list = document.createElement('ol');
+        preview1.appendChild(list);
+        for(var i = 0; i < curFiles.length; i++) {
+            var listItem = document.createElement('li');
+            var para = document.createElement('p');
+            if(validFileType(curFiles[i])) {
+                para.textContent = '文件名：' + curFiles[i].name + ', 文件大小：' + returnFileSize(curFiles[i].size) + '.';
+                var image = document.createElement('img');
+                image.src = window.URL.createObjectURL(curFiles[i]);
+                image.setAttribute("width", "480");
+                listItem.appendChild(image);
+                listItem.appendChild(para);
+            } else {
+                para.textContent = '文件名： ' + curFiles[i].name + ': Not a valid file type. Update your selection.';
+                listItem.appendChild(para);
+            }
+
+            list.appendChild(listItem);
+            }
+        }
+    }
+
+    var fileTypes1 = [
+    'image/jpeg',
+    'image/pjpeg',
+    'image/png'
+    ]
+
+    function validFileType(file) {
+    for(var i = 0; i < fileTypes1.length; i++) {
+        if(file.type === fileTypes1[i]) {
+        return true;
+        }
+    }
+    return false;
+    }   
+
+    function updateAudioDisplay() {
+    while(preview2.firstChild) {
+        preview2.removeChild(preview2.firstChild);
+    }
+
+    var curFiles = input[4].files;
+    if(curFiles.length === 0) {
+        var para = document.createElement('p');
+        para.textContent = 'No files currently selected for upload';
+        preview2.appendChild(para);
+    } else {
+        var list = document.createElement('ol');
+        preview2.appendChild(list);
+        for(var i = 0; i < curFiles.length; i++) {
+            var listItem = document.createElement('li');
+            var para = document.createElement('p');
+            para.textContent = '文件名：' + curFiles[i].name + ', 文件大小：' + returnFileSize(curFiles[i].size) + '.';
+            listItem.appendChild(para);
+
+            list.appendChild(listItem);
+            }
+        }
+    }
+
+    function updateVideoDisplay() {
+    while(preview3.firstChild) {
+        preview3.removeChild(preview3.firstChild);
+    }
+
+    var curFiles = input[5].files;
+    if(curFiles.length === 0) {
+        var para = document.createElement('p');
+        para.textContent = 'No files currently selected for upload';
+        preview3.appendChild(para);
+    } else {
+        var list = document.createElement('ol');
+        preview3.appendChild(list);
+        for(var i = 0; i < curFiles.length; i++) {
+            var listItem = document.createElement('li');
+            var para = document.createElement('p');
+            para.textContent = '文件名：' + curFiles[i].name + ', 文件大小：' + returnFileSize(curFiles[i].size) + '.';
+            listItem.appendChild(para);
+
+            list.appendChild(listItem);
+            }
+        }
+    }
+
+    function returnFileSize(number) {
+        if(number < 1024) {
+            return number + 'bytes';
+        } else if(number > 1024 && number < 1048576) {
+            return (number/1024).toFixed(1) + 'KB';
+        } else if(number > 1048576) {
+            return (number/1048576).toFixed(1) + 'MB';
+        }
+    }
+</script>
+
+<script type="text/javascript"> 
+    $('#upload-form').submit(function () {
+        $('#load').show();
+    });
+</script>
+
+
+</body></html>
